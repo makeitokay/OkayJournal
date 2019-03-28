@@ -1,0 +1,30 @@
+small {
+    display: block;
+    font-size: 60%;
+    line-height: 175%;
+}
+
+#authorName {
+    font-size: 85%;
+}
+
+.info {
+    margin-right: 10px;
+    color: #919191;
+}
+
+.card {
+    transition: 0.35s;
+    margin-top: 10px;
+}
+
+.card:hover {
+    box-shadow: 0 0 9px #00000038;
+}
+
+.announcement-info {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    text-align: right;
+}

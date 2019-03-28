@@ -1,0 +1,26 @@
+.dropdown-menu {
+    position: absolute;
+    top: 35px;
+    left: unset;
+    right: 0;
+    box-shadow: 0 0 16px #0000003b;
+}
+
+#navLink {
+    color: #B0B0B0;
+    transition: ease-in-out color .25s;
+}
+
+#navLink:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+#navbarDropdownMenuLink {
+    transition: 0.25s all;
+    color: #b0b0b0;
+}
+
+#navbarDropdownMenuLink:hover {
+    color: #fff;
+}

@@ -1,45 +1,58 @@
 {% extends 'base.html' %}
 
-{% block style %}
-.dropdown-menu {
-transform: translate(-5%, 0);
-}
-{% endblock %}
-
 {% block body %}
-<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-    <img class="mr-5" src="../static/img/logo.png" width="30" height="25" alt="OkayJournal">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/messages">Мои сообщения
-                    {% if unread %}
-                    <span class="badge badge-light">{{ unread }}</span>
-                    {% endif %}
-                </a>
-            </li>
-            {% if session["role"] == "SchoolAdmin" %}
-            <li class="nav-item active">
-                <a class="nav-link" href="/school_managing">Управление школой</a>
-            </li>
-            {% endif %}
-        </ul>
-        <span class="navbar-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink"
-               role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ session['user']["surname"] }} {{ session['user']["name"][0] }}. {{ session['user']["patronymic"][0] }}.
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+        <a href="/main_page">
+            <img class="mr-5" src="{{ url_for('static', filename='img/logo.png') }}" width="30" height="25"
+                 alt="OkayJournal">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" id="navLink" href="/messages">
+                        Мои сообщения
+                        {% if unread %}
+                            <span class="badge badge-light" id="unread_dialogs">{{ unread }}</span>
+                        {% endif %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="navLink" href="/announcements">Доска объявлений</a>
+                </li>
+                {% if session["role"] == "SchoolAdmin" %}
+                    <li class="nav-item">
+                        <a class="nav-link" id="navLink" href="/school_managing">Управление школой</a>
+                    </li>
+                {% endif %}
+                {% if session["role"] == "Teacher" %}
+                    <li class="nav-item">
+                        <a class="nav-link" id="navLink" href="/journal">Журнал</a>
+                    </li>
+                {% endif %}
+                {% if session["role"] == "Student" or session["role"] == "Parent" %}
+                    <li class="nav-item">
+                        <a class="nav-link" id="navLink" href="/diary/{{ today_week }}">Дневник</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="navLink" href="/reports">Отчёты</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <span class="navbar-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+               data-toggle="dropdown">
+                {{ session['user']["surname"] }}
+                {{ session['user']["name"][0] }}.
+                {{ session['user']["patronymic"][0] }}.
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <div class="dropdown-menu">
                 <a class="dropdown-item" href="/settings">Настройки</a>
                 <a class="dropdown-item" href="/logout">Выйти</a>
             </div>
         </span>
-    </div>
-</nav>
-
+        </div>
+    </nav>
 {% endblock %}
